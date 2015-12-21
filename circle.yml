@@ -1,0 +1,22 @@
+machine:
+  environment:
+    _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
+  java:
+    version: oraclejdk6
+
+dependencies:
+  cache_directories:
+    - mongodb-linux-x86_64-2.6.4
+  pre:
+    - if [[ ! -d mongodb-linux-x86_64-2.6.4 ]]; then wget http://downloads.mongodb.org/linux/mongodb-linux-x86_64-2.6.4.tgz && tar xvzf mongodb-linux-x86_64-2.6.4.tgz; fi
+    - sudo /etc/init.d/mongodb stop
+    - sudo cp mongodb-linux-x86_64-2.6.4/bin/* /usr/bin
+    - sudo /etc/init.d/mongodb start
+  override:
+    - java -XX:+PrintFlagsFinal -version
+    - mvn --version
+    - mvn test-compile -Pautodeps,play13 --fail-never --update-snapshots --settings .travis.settings.xml -e
+
+test:
+  override: 
+    - mvn test -Pautodeps,play13 --settings .travis.settings.xml -e
