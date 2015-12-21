@@ -13,13 +13,13 @@ dependencies:
 #    - stop mongodb
 #    - sudo cp mongodb-linux-x86_64-2.6.4/bin/* /usr/bin
 #    - sudo /etc/init.d/mongodb start
-    - start mongodb
+    - service mongodb start
   override:
     - java -XX:+PrintFlagsFinal -version
     - mvn --version
     - mvn test-compile -Pautodeps,play13 --fail-never --update-snapshots --settings .travis.settings.xml -e
   post:
-    - stop mongodb
+    - service mongodb stop
 
 test:
   override: 
