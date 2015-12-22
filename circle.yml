@@ -5,22 +5,13 @@ machine:
     version: oraclejdk6
 
 dependencies:
-#  cache_directories:
-#    - mongodb-linux-x86_64-2.6.4
-  pre:
-#    - if [[ ! -d mongodb-linux-x86_64-2.6.4 ]]; then wget http://downloads.mongodb.org/linux/mongodb-linux-x86_64-2.6.4.tgz && tar xvzf mongodb-linux-x86_64-2.6.4.tgz; fi
-#    - sudo /etc/init.d/mongodb stop
-#    - stop mongodb
-#    - sudo cp mongodb-linux-x86_64-2.6.4/bin/* /usr/bin
-#    - sudo /etc/init.d/mongodb start
-    - service mongodb start
   override:
     - java -XX:+PrintFlagsFinal -version
     - mvn --version
     - mvn test-compile -Pautodeps,play13 --fail-never --update-snapshots --settings .travis.settings.xml -e
-  post:
-    - service mongodb stop
+  cache_directories:
+    - ~/.embedmongo
 
 test:
   override: 
-    - mvn test -Pautodeps,play13 --settings .travis.settings.xml -e
+    - mvn verify -Pautodeps,play13,embedmongo --settings .travis.settings.xml -e

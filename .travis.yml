@@ -1,17 +1,15 @@
 language: java
 
-services:
-  - mongodb
-
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.embedmongo
 
 install:
   - java -XX:+PrintFlagsFinal -version
   - mvn --version
 
 script:
-  - mvn test -Pautodeps,play13 --update-snapshots --settings .travis.settings.xml -e
+  - mvn test -Pautodeps,play13,embedmongo --update-snapshots --settings .travis.settings.xml -e
 
 jdk: oraclejdk7
