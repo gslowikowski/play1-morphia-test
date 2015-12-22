@@ -10,6 +10,6 @@ install:
   - mvn --version
 
 script:
-  - mvn test -Pautodeps,play13,embedmongo --update-snapshots --settings .travis.settings.xml -e
+  - mvn verify -Pautodeps,play13,embedmongo --update-snapshots --settings .travis.settings.xml -e
 
 jdk: oraclejdk7
