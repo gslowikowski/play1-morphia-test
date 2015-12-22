@@ -9,9 +9,7 @@ dependencies:
     - java -XX:+PrintFlagsFinal -version
     - mvn --version
     - mvn test-compile -Pautodeps,play13 --fail-never --update-snapshots --settings .travis.settings.xml -e
-  cache_directories:
-    - ~/.embedmongo
 
 test:
   override: 
-    - mvn verify -Pautodeps,play13,embedmongo --settings .travis.settings.xml -e
+    - mvn verify -Pautodeps,play13 --settings .travis.settings.xml -e
