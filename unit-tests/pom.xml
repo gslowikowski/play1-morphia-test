@@ -171,6 +171,7 @@ limitations under the License.
                                     <goal>start</goal>
                                 </goals>
                                 <configuration>
+                                    <port>37017</port>
                                     <version>2.7.8</version>
                                 </configuration>
                             </execution>
