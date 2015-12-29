@@ -19,7 +19,6 @@ before_script:
 
 script:
   - ps aux | grep mongo
-  - netstat -tln | grep 27017
   - mvn verify -Pautodeps,play13 --update-snapshots --settings .travis.settings.xml -e
 
 jdk: oraclejdk7
