@@ -8,7 +8,7 @@ cache:
 install:
   - java -XX:+PrintFlagsFinal -version
   - mvn --version
-  - mongod --version
+  -  mongod --version
 
 script:
   - mvn verify -Pautodeps,play13,xxxembedmongo --update-snapshots --settings .travis.settings.xml -e
