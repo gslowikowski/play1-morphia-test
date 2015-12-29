@@ -6,19 +6,13 @@ services:
 cache:
   directories:
     - $HOME/.m2
-    - $HOME/.embedmongo
 
 install:
   - java -XX:+PrintFlagsFinal -version
   - mvn --version
   - mongod --version
 
-before_script:
-  - sleep 15
-  - mongo mydb_test --eval 'db.addUser("travis", "test");'
-
 script:
-  - ps aux | grep mongo
   - mvn verify -Pautodeps,play13 --update-snapshots --settings .travis.settings.xml -e
 
 jdk: oraclejdk7
