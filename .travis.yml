@@ -14,6 +14,7 @@ install:
   - mongod --version
 
 script:
+  - ps aux | grep mongo
   - mvn verify -Pautodeps,play13,xxxembedmongo --update-snapshots --settings .travis.settings.xml -e
 
 jdk: oraclejdk7
